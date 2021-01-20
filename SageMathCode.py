@@ -51,8 +51,8 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 1, startingPosition = []
     remainingGaps = []
     while(currentGame < numberOfGames):
         print "Game ", (currentGame + 1)
-        movesPlayed = startingPosition
-        turn = (-1)**(currentGame + 1)**(len(movesPlayed))
+        movesPlayed = [i for i in startingPosition]
+        turn = (-1)**((currentGame + 1)+(len(movesPlayed)))
         while(gameNotComplete(movesPlayed)):
             #print(movesPlayed)
             if(turn == -1):
