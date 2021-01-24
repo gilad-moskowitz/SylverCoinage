@@ -17,6 +17,7 @@ To show that any number greater than 4 also can be made using 4’s and 5’s we
 	14 can be made with two 5’s and a 4
 	15 can be made with three 5’s
 	Now every number can be made as 12 + 4k, 13 + 4k, 14 + 4k, or 15 + 4k for k >= 0
+\n
 Player 1 picks 11
 	The only numbers left that players can pick from are: {1, 2, 3, 6, 7}
 Player 2 picks 7
