@@ -1,4 +1,4 @@
-def alwaysMaxAI(movesPlayed, remainingGaps = []):
+def exampleBot(movesPlayed, remainingGaps = []):
     if (len(movesPlayed) == 0):
         return random.randint(4, 30)
     elif((3 in movesPlayed) and (2 not in movesPlayed)):
