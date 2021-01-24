@@ -58,7 +58,7 @@ So player 2 must choose 1 and therefore lose.
 
 Design a bot that plays the game best under all circumstances. This means that whatever the starting move, the bot still makes the best move from there. There are known states that result in winning and losing positions, but there are only complete strategies for a very small number of starting states. 
 
-RULES FOR THE BOT:
+### RULES FOR THE BOT:
 
 •	The program that tests the bots is written in SageMath (python 2) and each “player” is a function that gets called. 
 
