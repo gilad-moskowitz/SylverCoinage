@@ -45,12 +45,12 @@ def gameNotComplete(movesPlayed):
 def SylverCoinageGame(Player1, Player2, numberOfGames = 1, startingPosition = []):
     p1_wins = 0
     p2_wins = 0
-    p1_penalties = 0
-    p2_penalties = 0
     currentGame = 0
     remainingGaps = []
     while(currentGame < numberOfGames):
         print "Game ", (currentGame + 1)
+        p1_penalties = 0
+        p2_penalties = 0
         movesPlayed = [i for i in startingPosition]
         turn = (-1)**((currentGame + 1)+(len(movesPlayed)))
         while(gameNotComplete(movesPlayed)):
@@ -117,7 +117,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 1, startingPosition = []
 def roundRobinTourney(listOfBots, numberOfRounds, gamesPerMatch = 100, startingPosition = []): 
     bestBot = {}
     for i in range(1, len(listOfBots) + 1):
-        bestBot[i] = [0, 0, 0]
+        bestBot[i] = [0, 0, 0, 0]
     currentRound = 1
     while(currentRound <= numberOfRounds):
         j = 0
@@ -136,6 +136,8 @@ def roundRobinTourney(listOfBots, numberOfRounds, gamesPerMatch = 100, startingP
                 bestBot[k + 1][1] += A[1]
                 bestBot[j + 1][2] += A[0] - A[1]
                 bestBot[k + 1][2] += A[1] - A[0]
+                bestBot[j + 1][3] += A[0] - 50
+                bestBot[k + 1][3] += A[1] - 50
                 k += 1
             j += 1
             k = (j + 1)
