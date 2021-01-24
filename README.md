@@ -3,9 +3,9 @@ This contains the code (SageMath) used for testing and running Sylver Coinage ga
 
 You must have the NumericalGapsPackage installed in the same place as the files from this repository. 
 
-Sylver Coinage:
+## Sylver Coinage:
 
-GAMEPLAY:
+### GAMEPLAY:
 
 Sylver Coinage is a game played between two players. On each player’s turns they list a positive integer that can’t be made as a linear combination of the previously named numbers. The first player to pick the number 1, loses. An example game could work as follows:
 
@@ -54,7 +54,7 @@ Player 1 picks 2
 So player 2 must choose 1 and therefore lose. 
 
 
-THE GOAL:
+### THE GOAL:
 
 Design a bot that plays the game best under all circumstances. This means that whatever the starting move, the bot still makes the best move from there. There are known states that result in winning and losing positions, but there are only complete strategies for a very small number of starting states. 
 
@@ -68,7 +68,7 @@ RULES FOR THE BOT:
 
 •	If the function returns an integer that is not a legal move, they earn a penalty. If, during a single game a player gets 3 penalties, they are forced to choose 1 and they lose the game. 
 
-RULES FOR THE TOURNAMENT:
+### RULES FOR THE TOURNAMENT:
 
 •	The tournament will be a round robin tournament wherein each bot plays matches with each other both 3 times.
 
