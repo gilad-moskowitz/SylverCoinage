@@ -6,8 +6,8 @@ import random
 
 
 def legalMove(move, movesPlayed, remainingGaps = []):
-    if (move in remainingGaps):
-        return True
+    #if (move in remainingGaps):
+        #return True
     if (len(movesPlayed) == 0):
         return True
     gcdSoFar = gcd(movesPlayed)
