@@ -68,6 +68,8 @@ Design a bot that plays the game best under all circumstances. This means that w
 
 •	If the function returns an integer that is not a legal move, they earn a penalty. If, during a single game a player gets 3 penalties, they are forced to choose 1 and they lose the game. 
 
+•	I have now added a testing package that you can download to test the bot. Replace the file "myNewBot.py" with your code for the robot (under the same name) and run the "botTestingSylverCoinage.py" program to see your bot tested against the current testingBot. 
+
 ### RULES FOR THE TOURNAMENT:
 
 •	The tournament will be a round robin tournament wherein each bot plays matches with each other both 3 times.
