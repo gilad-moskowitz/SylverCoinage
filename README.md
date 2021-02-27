@@ -60,7 +60,7 @@ Design a bot that plays the game best under all circumstances. This means that w
 
 ### RULES FOR THE BOT:
 
-•	The program that tests the bots is written in SageMath (python 2) and each “player” is a function that gets called. 
+•	The program that tests the bots is written in SageMath (python 2) and each bot has a function "nextMove" that gets called. 
 
 •	The inputs for the function are 1) The moves played so far, 2) The remaining possible moves if there is a finite number of them
 
