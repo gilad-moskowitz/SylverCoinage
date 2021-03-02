@@ -16,10 +16,7 @@ def legalMove(move, movesPlayed, remainingGaps = []):
     if (gcdSoFar == 1):
         S = ListByGens(movesPlayed)
         gap = gaps(S)
-        if (move in gap):
-            return True
-        else:
-            return False
+        return move in gap
     else:
         if (gcd_list([move, gcdSoFar]) < gcdSoFar):
             return True
@@ -27,10 +24,7 @@ def legalMove(move, movesPlayed, remainingGaps = []):
             newSet = [int(i/gcdSoFar) for i in movesPlayed]
             S_new = ListByGens(newSet)
             gap_new = gaps(S_new)
-            if (move/gcdSoFar in gap_new):
-                return True
-            else:
-                return False
+            return (move/gcdSoFar) in gap_new
         else:
             return True
             
