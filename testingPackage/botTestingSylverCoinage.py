@@ -96,7 +96,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
             p2_wins += 1
             print (movesPlayed, "Player 2 wins", "Current Score: ", [p1_wins, p2_wins])
         currentGame += 1
-    print("Final Score: " [p1_wins, p2_wins])
+    print("Final Score: ", [p1_wins, p2_wins])
     input("End.")
     return [p1_wins, p2_wins]
     
