@@ -49,7 +49,6 @@ class NumericalSemigroup:
         self.elements = self.getElements(self.gens)
         self.gaps = [i*gcd_list(self.gens) for i in range(0, max(self.elements)) if ((i*gcd_list(self.gens) not in self.elements) and (i*gcd_list(self.gens) < max(self.elements)))]
         self.AperySetWithRespectToTheMultiplicity = self.AperySet(min(self.gens))
-        self.gens = self.minimalGenerators()
   
     def getElements(self, gens):
         currentCount = 0
