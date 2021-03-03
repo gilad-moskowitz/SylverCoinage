@@ -1,5 +1,6 @@
 import random
-from semigroupPackage import *
+from numericalSemigroupLite import *
+
 class myBot:
     def __init__(self):
         pass
@@ -33,8 +34,8 @@ class myBot:
                 if ((1 in newSet) and (gcd_moves > 1)):
                     return (gcd_moves*2 + 1)
                 if(len(remainingGaps) == 0):
-                    S = ListByGens(newSet)
-                    remainingMoves = gaps(S)
+                    S = NumericalSemigroup(newSet)
+                    remainingMoves = S.gaps
                 else:
                     remainingMoves = [i for i in remainingGaps]
                 if((len(remainingMoves) <= 1) and gcd_moves > 1):
