@@ -44,6 +44,10 @@ class NumericalSemigroup:
             raise Exception("The input generators must be in the form of a list")
         if(len(self.gens) == 0):
             raise Exception("There must be at least one generator")
+        try:
+            self.gens = [int(i) for i in self.gens]
+        except:
+            "One of the given generators was not an integer."
         self.gens = sorted(list(self.gens))
         self.multiplicity = min(self.gens)
         self.elements = self.getElements(self.gens)
