@@ -21,8 +21,8 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
     p1_wins = 0
     p2_wins = 0
     currentGame = 0
-    remainingGaps = []
     while(currentGame < numberOfGames):
+        remainingGaps = []
         print ("Game ", (currentGame + 1))
         p1_penalties = 0
         p2_penalties = 0
