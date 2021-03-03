@@ -6,6 +6,7 @@ class myBot:
         pass
     
     def nextMove(self, movesPlayed, remainingGaps = []):
+        movesPlayed = [int(i) for i in movesPlayed]
         if (len(movesPlayed) == 0):
             return random.choice([5, 7, 11, 13, 17, 19, 23, 29, 31, 37])
         elif((3 in movesPlayed) and (2 not in movesPlayed)):
