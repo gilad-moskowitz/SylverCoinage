@@ -47,7 +47,7 @@ class NumericalSemigroup:
         try:
             self.gens = [int(i) for i in self.gens]
         except:
-            raise Excpetion("One of the given generators was not an integer.") from None
+            raise Exception("One of the given generators was not an integer.") from None
         self.gens = sorted(list(self.gens))
         self.multiplicity = min(self.gens)
         self.elements = self.getElements(self.gens)
