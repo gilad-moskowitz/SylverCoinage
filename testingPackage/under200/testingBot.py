@@ -1,7 +1,7 @@
 import random
 from numericalSemigroupLite import *
 
-class myBot:
+class testBot:
     def __init__(self):
         pass
     
