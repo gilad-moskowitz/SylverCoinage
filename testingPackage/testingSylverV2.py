@@ -77,6 +77,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
                     else:
                         print("That was not a legal move")
                         continue
+        turn = (-1)**((len(movesPlayed) + 1)
         if (turn == -1):
             p1_wins += 1
             print (movesPlayed, "Player 1 wins", "Current Score: ", [p1_wins, p2_wins])
