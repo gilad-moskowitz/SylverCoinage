@@ -65,6 +65,9 @@ class testBot:
                         linearCombos = [i for i in range(1, max(remainingMoves)) if i not in remainingMoves]
                         j = len(remainingMoves) - 1
                         while(j > 2):
+                            if((remainingMoves[j])*gcd_moves > cap):
+                                j -= 1
+                                continue
                             for l in linearCombos:
                                 if (((remainingMoves[j] - l) in remainingMoves) and ((remainingMoves[j] - l) > 3) and ((remainingMoves[j] - l)*gcd_moves < cap)):
                                     return ((remainingMoves[j] - l)*gcd_moves)
