@@ -7,10 +7,10 @@ from testingBot3 import testBot as tBot3
 from testingBot4 import testBot as tBot4
 from numericalSemigroupLite import*
 
-def legalMove(move, movesPlayed, remainingGaps = []):
+def legalMove(move, movesPlayed, remainingGaps, cap):
     if ((type(move) != int) or move < 1):
         return False
-    if (move > 200):
+    if (move > cap):
         return False
     if (move in remainingGaps):
         return True
@@ -22,7 +22,7 @@ def legalMove(move, movesPlayed, remainingGaps = []):
     return (move not in S)
 
 #PLAYING THE GAME:
-def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = []):
+def SylverCoinageGame(Player1, Player2, cap = 200, numberOfGames = 100, startingPosition = []):
     p1_wins = 0
     p2_wins = 0
     currentGame = 0
@@ -35,10 +35,10 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
         turn = (-1)**((currentGame + 1)+(len(movesPlayed)))
         while(1 not in movesPlayed):
             if(turn == -1):
-                move = Player1(movesPlayed, remainingGaps)
+                move = Player1(movesPlayed, remainingGaps, cap)
             else:
-                move = Player2(movesPlayed, remainingGaps)
-            if legalMove(move, movesPlayed, remainingGaps):
+                move = Player2(movesPlayed, remainingGaps, cap)
+            if legalMove(move, movesPlayed, remainingGaps, cap):
                 movesPlayed.append(move)
                 if (gcd_list(movesPlayed) != 1):
                     turn = turn * (-1)
@@ -67,6 +67,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
                     if(p1_penalties >= 3):
                         print("Too many penalties, you lose")
                         movesPlayed.append(1)
+                        turn = turn*(-1)
                         p1_penalities = 0
                         p2_penalities = 0
                     else:
@@ -77,6 +78,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
                     if(p2_penalties >= 3):
                         print("Too many penalties, you lose")
                         movesPlayed.append(1)
+                        turn = turn*(-1)
                         p1_penalities = 0
                         p2_penalities = 0
                     else:
@@ -95,4 +97,7 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
     
 if __name__ == '__main__':
     numOfGames = int(input("How many games would you like to test the bot? "))
-    SylverCoinageGame(testBot().nextMove, myBot().nextMove, numOfGames)
+    eachGameCap = int(input("What is the cap for move value (at least 10)?"))
+    if(eachGameCap < 10):
+        eachGameCap = 10
+    SylverCoinageGame(testBot().nextMove, myBot().nextMove, eachGameCap, numOfGames)
