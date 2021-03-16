@@ -11,7 +11,7 @@ def legalMove(move, movesPlayed, remainingGaps = []):
     if ((type(move) != int) or move < 1):
         return False
     if (move > 200):
-      return False
+        return False
     if (move in remainingGaps):
         return True
     if((len(remainingGaps) > 0) and (move not in remainingGaps)):
