@@ -6,9 +6,8 @@ class testBot:
         pass
     
     def nextMove(self, movesPlayed, remainingGaps = []):
-        movesPlayed = [int(i) for i in movesPlayed]
         if (len(movesPlayed) == 0):
-            return random.choice([5, 7, 11, 13, 17, 19, 23, 29, 31, 37])
+            return random.choice([5, 7, 11, 13, 17, 19, 23, 29])
         elif((3 in movesPlayed) and (2 not in movesPlayed)):
             return 2
         elif((2 in movesPlayed) and (3 not in movesPlayed)):
@@ -27,22 +26,29 @@ class testBot:
                     newMove = newMove*a
                 return int(((newMove/min(factors)) + 1)*min(factors))
         else:
-            gcd_moves = gcd(movesPlayed)
+            gcd_moves = gcd_list(movesPlayed)
             if(gcd_moves > 1):
                 newSet = [int(i/gcd_moves) for i in movesPlayed]
                 if (1 in newSet):
                     return ((gcd_moves + 1))
                 S = NumericalSemigroup(newSet)
                 remainingMoves = S.gaps
-                if((int((max(remainingMoves)*gcd_moves)) == 2) or (int((max(remainingMoves)*gcd_moves)) == 3)):
-                    return ((gcd_moves*2 + 1))
+                if(len(remainingMoves) > 1):
+                    return ((remainingMoves[1])*gcd_moves)
                 else:
-                    return int((max(remainingMoves)*gcd_moves))
+                    return ((gcd_moves*2 + 1))
             elif(gcd_moves == 0):
-                return random.randint(4, 30)
+                return random.randint(4, 100)
             else:
                 if (len(remainingGaps) == 0):
                     S = NumericalSemigroup(movesPlayed)
-                    return int(max(S.gaps))
+                    remainMoves = S.gaps
+                    if (len(remainMoves) > 3):
+                        return int(remainMoves[3])
+                    else:
+                        return max(remainMoves)
                 else:
-                    return max(remainingGaps)
+                    if (len(remainingGaps) > 3):
+                        return int(remainingGaps[3])
+                    else:
+                        return max(remainingGaps)

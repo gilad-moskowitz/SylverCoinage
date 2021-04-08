@@ -27,26 +27,27 @@ class testBot:
                     newMove = newMove*a
                 return int(((newMove/min(factors)) + 1)*min(factors))
         else:
-        gcd_moves = gcd(movesPlayed)
-        if(gcd_moves > 1):
-            newSet = [int(i/gcd_moves) for i in movesPlayed]
-            if (1 in newSet):
-                return ((gcd_moves + 1))
-            S = NumericalSemigroup(newSet)
-            remainingMoves = S.gaps
-            if(len(remainingMoves) > 1):
-                return ((remainingMoves[random.randint(1, len(remainingMoves) - 1)])*gcd_moves)
-            else:
-        else:
-            if (len(remainingGaps) == 0):
-                S = NumericalSemigroup(movesPlayed)
-                remainMoves = S.gaps
-                if (len(remainMoves) > 3):
-                    return int(remainMoves[random.randint(3, len(remainMoves) - 1)])
+            gcd_moves = gcd_list(movesPlayed)
+            if(gcd_moves > 1):
+                newSet = [int(i/gcd_moves) for i in movesPlayed]
+                if (1 in newSet):
+                    return ((gcd_moves + 1))
+                S = NumericalSemigroup(newSet)
+                remainingMoves = S.gaps
+                if(len(remainingMoves) > 1):
+                    return ((remainingMoves[random.randint(1, len(remainingMoves) - 1)])*gcd_moves)
                 else:
-                    return max(remainMoves)
+                    return ((gcd_moves*2 + 1))
             else:
-                if (len(remainingGaps) > 3):
-                    return int(remainingGaps[random.randint(3, len(remainingGaps) - 1)])
+                if (len(remainingGaps) == 0):
+                    S = NumericalSemigroup(movesPlayed)
+                    remainMoves = S.gaps
+                    if (len(remainMoves) > 3):
+                        return int(remainMoves[random.randint(3, len(remainMoves) - 1)])
+                    else:
+                        return max(remainMoves)
                 else:
-                    return max(remainingGaps)
+                    if (len(remainingGaps) > 3):
+                        return int(remainingGaps[random.randint(3, len(remainingGaps) - 1)])
+                    else:
+                        return max(remainingGaps)

@@ -3,30 +3,68 @@ from numericalSemigroupLite import *
 
 class myBot:
     def __init__(self):
-        pass
+        self.pPositions = [(2, 3), (4, 6), (4, 5, 6, 7), (4, 5, 11), (8, 12), (6, 9), (5, 7, 8), (4, 7, 13), (4, 9, 19), (5, 6, 19), (5, 9, 31), (6, 7, 16), (7, 9, 19), (7, 9, 24), (7, 10, 12), (4, 10), (6, 8, 10), (8, 10, 12, 14)]
+    
+    def minGenFunction(self, generators):
+        allGens = sorted(list(set(generators)))
+        for a in allGens:
+            modo = [i%a for i in allGens]
+            theEnd = int(len(allGens))
+            start = 0
+            while(start < theEnd):
+                if(modo.index(modo[start]) != start):
+                    modo.pop(start)
+                    allGens.pop(start)
+                    start = 0
+                    theEnd = len(allGens)
+                start += 1
+        return sorted(list(set([i for i in allGens])))
+    
+    def checkForWin(self, minGens):
+        for a in self.pPositions:
+            for b in a:
+                newCheck = [i for i in minGens]
+                newCheck.append(b)
+                newCheck = tuple(self.minGenFunction(newCheck))
+                if ((newCheck == a) and (b not in minGens)):
+                    return b
+        return 0
+    
+    def coverRelations(self, gap):
+        linComb = [i for i in range(0, max(gap) + 1) if i not in gap]
+        dictionary = {};
+        for i in range(0, len(gap)):
+            covers = []
+            for j in range(i + 1, len(gap)):
+                for k in range(0, len(linComb)):
+                    if(gap[j] - linComb[k] < gap[i]):
+                        break
+                    if(((gap[j] - linComb[k]) > 0) and ((gap[j] - linComb[k])%gap[i] == 0)):
+                        covers.append(gap[j])
+                        break
+            dictionary[gap[i]] = covers
+        return dictionary
+    
+    def pretendMove(self, gaps, pretend):
+        covering = self.coverRelations(gaps)
+        return [i for i in gaps if((i not in covering[pretend]) and (i != pretend))]
+    
+    def possibleMoves(self, gaps):
+        covering = self.coverRelations(gaps)
+        potentials = []
+        for a in covering:
+            if((len(gaps) - len(covering[a]))%2 == 0):
+                potentials.append(a)
+        return potentials
     
     def nextMove(self, movesPlayed, remainingGaps = []):
         movesPlayed = [int(i) for i in movesPlayed]
+        minMoves = self.minGenFunction(movesPlayed)
+        possibleWinningMove = self.checkForWin(minMoves)
+        if(possibleWinningMove > 0):
+            return possibleWinningMove
+        remainingMoves = [i for i in remainingGaps]
         if(len(remainingGaps)>0):
-            remainingMoves = [i for i in remainingGaps]
-            check4511 = [0, 0, 0]
-            array4511 = [4, 5, 11]
-            numberIn = 0
-            for i in range(0, 3):
-                if(array4511[i] in remainingMoves):
-                    check4511[i] = 1
-                    numberIn += 1
-            if (numberIn == 1):
-                if((6 not in movesPlayed) and (7 not in movesPlayed)):
-                    for j in range(0,3):
-                        if(check4511[j] == 1):
-                            return int(array4511[j])
-                elif((6 in movesPlayed) and (7 in movesPlayed)):
-                    for j in range(0,3):
-                        if(check4511[j] == 1):
-                            return int(array4511[j])
-                else:
-                    pass
             if((len(remainingMoves)%2) == 0):
                 return (max(remainingMoves))
             else:
@@ -42,12 +80,6 @@ class myBot:
                 return (max(remainingMoves))
         if (len(movesPlayed) == 0):
             return random.choice([5, 7, 11, 13, 17, 19, 23, 29, 31, 37])
-        elif((3 in movesPlayed) and (2 not in movesPlayed)):
-            return 2
-        elif((2 in movesPlayed) and (3 not in movesPlayed)):
-            return 3
-        if(len(movesPlayed) == 1 and 4 in movesPlayed):
-            return 6
         elif(len(movesPlayed) == 1):
             factors = PrimeFactorization(movesPlayed[0])
             if (len(factors) == 1):
@@ -77,24 +109,6 @@ class myBot:
                 if((len(remainingMoves) <= 1) and gcd_moves > 1):
                     return (gcd_moves*2 + 1)
                 else:
-                    check4511 = [0, 0, 0]
-                    array4511 = [4, 5, 11]
-                    numberIn = 0
-                    for i in range(0, 3):
-                        if(array4511[i] in remainingMoves):
-                            check4511[i] = 1
-                            numberIn += 1
-                    if (numberIn == 1):
-                        if((6 not in movesPlayed) and (7 not in movesPlayed)):
-                            for j in range(0,3):
-                                if(check4511[j] == 1):
-                                    return int(array4511[j])
-                        elif((6 in movesPlayed) and (7 in movesPlayed)):
-                            for j in range(0,3):
-                                if(check4511[j] == 1):
-                                    return int(array4511[j])
-                        else:
-                            pass
                     if((len(remainingMoves)%2) == 0):
                         return (max(remainingMoves)*gcd_moves)
                     else:
