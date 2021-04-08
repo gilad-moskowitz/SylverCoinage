@@ -3,29 +3,25 @@ try:
 except:
     raise Exception("No access/couldn't find to numericalSemigroupLite.py'") from None
 try:
-    from newBestBot import maybeSolved as bestBot
+    from bestBot import myBot as bestBot
 except:
-    print("WARNING! No access/couldn't find to newBestBot.py'")
+    print("WARNING! No access/couldn't find to bestBot.py'")
 try:
-    from oldUpdatedBestBot import myBot as oldBestBot
+    from mediumBot import myBot as mediumBot
 except:
-    print("WARNING! No access/couldn't find to oldUpdatedBestBot.py'")
+    print("WARNING! No access/couldn't find to mediumBot.py'")
 try:
-    from myNewBotOld import myBot as mediumOldBot
+    from betterBot import myBot as betterBot
 except:
-    print("WARNING! No access/couldn't find to myNewBotOld.py'")
+    print("WARNING! No access/couldn't find to betterBot.py'")
 try:
-    from myNewBot import myBot as betterOldBot
+    from worstBot import testBot as worstBot
 except:
-    print("WARNING! No access/couldn't find to myNewBot.py'")
+    print("WARNING! No access/couldn't find to worstBot.py'")
 try:
-    from testingBot2 import testBot as worstBot
+    from randomBot import testBot as randomBot
 except:
-    print("WARNING! No access/couldn't find to testingBot2.py'")
-try:
-    from testingBot4 import testBot as randomBot
-except:
-    print("WARNING! No access/couldn't find to testingBot4.py'")
+    print("WARNING! No access/couldn't find to randomBot.py'")
 #ADDING YOUR OWN BOT CODE
 try:
     from myOwnBot import myBot
@@ -55,7 +51,11 @@ def SylverCoinageGame(Player1, Player2, numberOfGames = 100, startingPosition = 
         print ("Game ", (currentGame + 1))
         p1_penalties = 0
         p2_penalties = 0
-        movesPlayed = [i for i in startingPosition]
+        if(0 in startingPosition):
+            remainingGaps = startingPosition[1:]
+            movesPlayed = []
+        else:
+            movesPlayed = [i for i in startingPosition]
         turn = (-1)**((currentGame + 1)+(len(movesPlayed)))
         while(1 not in movesPlayed):
             if(turn == -1):
@@ -157,31 +157,31 @@ if __name__ == '__main__':
     try:
         allBots.append(bestBot().nextMove)
     except:
-        allBotNames.pop(0)
+        allBotNames.pop(allBotNames.index("bestBot"))
     try:
         allBots.append(oldBestBot().nextMove)
     except:
-        allBotNames.pop(1)
+        allBotNames.pop(allBotNames.index("oldBestBot"))
     try:
         allBots.append(mediumOldBot().nextMove)
     except:
-        allBotNames.pop(2)
+        allBotNames.pop(allBotNames.index("mediumOldBot"))
     try:
         allBots.append(betterOldBot().nextMove)
     except:
-        allBotNames.pop(3)
+        allBotNames.pop(allBotNames.index("betterOldBot"))
     try:
         allBots.append(worstBot().nextMove)
     except:
-        allBotNames.pop(4)
+        allBotNames.pop(allBotNames.index("worstBot"))
     try:
         allBots.append(randomBot().nextMove)
     except:
-        allBotNames.pop(5)
+        allBotNames.pop(allBotNames.index("randomBot"))
     try:
         allBots.append(myBot().nextMove)
     except:
-        allBotNames.pop(6)
+        allBotNames.pop(allBotNames.index("myBot"))
     
     if(len(allBots) == 0):
         input("Oh no, you don't have access to any bots. Please download the necessary files and try again.")
@@ -189,24 +189,29 @@ if __name__ == '__main__':
         print("You have access to the following bots using the corresponding numbers: ")
         for i in range(0, len(allBots)):
             print(i, ": ", allBotNames[i])
-    if(len(allBots) > 1):
-        roundRobin = False
-        answer = str(input("Would you like a round robin tournament with all the bots you have access to? (y/n) "))
-        if(answer.lower() == "y" or answer.lower() == "yes" or answer == "1"):
-            numOfGames = int(input("How many games would you the bots to play per match? "))
-            numOfRound = int(input("How many rounds would you the bots to play? "))
-            results = roundRobinTourney(allBots, numOfRound, numOfGames)
-            print(results)
-            input("End.")
+        remainingMoves = []
+        withCapAnswer = str(input("Would you like to cap the move value that the bots can play? (y/n) "))
+        if(withCapAnswer.lower() == "y" or withCapAnswer.lower() == "yes" or withCapAnswer == "1"):
+            capValue = int(input("What value (exclusive) would you like the cap? "))
+            remainingMoves = [i for i in range(0, capValue)]
+        if(len(allBots) > 1):
+            roundRobin = False
+            answer = str(input("Would you like a round robin tournament with all the bots you have access to? (y/n) "))
+            if(answer.lower() == "y" or answer.lower() == "yes" or answer == "1"):
+                numOfGames = int(input("How many games would you the bots to play per match? "))
+                numOfRound = int(input("How many rounds would you the bots to play? "))
+                results = roundRobinTourney(allBots, numOfRound, numOfGames, remainingMoves)
+                print(results)
+                input("End.")
+            else:
+                first = int(input("What is the number corresponding the the first bot you would like to test? "))
+                second = int(input("What is the number corresponding the the second bot you would like to test? "))
+                numOfGames = int(input("How many games would you the bots to play? "))
+                SylverCoinageGame(allBots[first], allBots[second], numOfGames, remainingMoves)
+                input("End.")
         else:
             first = int(input("What is the number corresponding the the first bot you would like to test? "))
             second = int(input("What is the number corresponding the the second bot you would like to test? "))
             numOfGames = int(input("How many games would you the bots to play? "))
-            SylverCoinageGame(allBots[first], allBots[second], numOfGames)
+            SylverCoinageGame(allBots[first], allBots[second], numOfGames, remainingMoves)
             input("End.")
-    else:
-        first = int(input("What is the number corresponding the the first bot you would like to test? "))
-        second = int(input("What is the number corresponding the the second bot you would like to test? "))
-        numOfGames = int(input("How many games would you the bots to play? "))
-        SylverCoinageGame(allBots[first], allBots[second], numOfGames)
-        input("End.")
