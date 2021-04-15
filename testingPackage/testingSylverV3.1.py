@@ -153,23 +153,19 @@ def roundRobinTourney(listOfBots, numberOfRounds = 3, gamesPerMatch = 100, start
     
 if __name__ == '__main__':
     allBots = []
-    allBotNames = ["bestBot", "oldBestBot", "mediumOldBot", "betterOldBot", "worstBot", "randomBot", "myBot"]
+    allBotNames = ["bestBot", "mediumBot", "betterBot", "worstBot", "randomBot", "myBot"]
     try:
         allBots.append(bestBot().nextMove)
     except:
         allBotNames.pop(allBotNames.index("bestBot"))
     try:
-        allBots.append(oldBestBot().nextMove)
+        allBots.append(mediumBot().nextMove)
     except:
-        allBotNames.pop(allBotNames.index("oldBestBot"))
+        allBotNames.pop(allBotNames.index("mediumBot"))
     try:
-        allBots.append(mediumOldBot().nextMove)
+        allBots.append(betterBot().nextMove)
     except:
-        allBotNames.pop(allBotNames.index("mediumOldBot"))
-    try:
-        allBots.append(betterOldBot().nextMove)
-    except:
-        allBotNames.pop(allBotNames.index("betterOldBot"))
+        allBotNames.pop(allBotNames.index("betterBot"))
     try:
         allBots.append(worstBot().nextMove)
     except:
